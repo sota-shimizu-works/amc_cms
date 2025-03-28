@@ -1,0 +1,9 @@
+services:
+  frontend:
+    ports:
+      - "3000:3000"
+    build: frontend
+    container_name: amc_cms_node
+    tty: true
+    volumes:
+      - ../frontend:/usr/src/app
