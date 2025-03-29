@@ -1,5 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import "leaflet/dist/leaflet.css";
 
 export default function RootLayout({
   children,

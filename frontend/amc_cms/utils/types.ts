@@ -88,3 +88,12 @@ export type PageCategory = {
 export type Page = PageBase & {
   page_category?: PageCategory | null;
 };
+
+export type Location = {
+  id: string;
+  region: string;
+  city: string;
+  lat: number | null;
+  lng: number | null;
+  created_at: string;
+};

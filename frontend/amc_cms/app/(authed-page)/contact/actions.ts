@@ -53,3 +53,17 @@ export const updateRead = async (contactId: number, isRead: boolean) => {
 
   return data;
 };
+
+export const selectUnreadCount = async () => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("contact")
+    .select("*")
+    .eq("is_read", false);
+
+  if (error) {
+    console.error("Error fetching unread count", error);
+    return 0;
+  }
+  return { success: true, data: data };
+};
