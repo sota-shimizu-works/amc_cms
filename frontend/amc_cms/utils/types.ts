@@ -97,3 +97,24 @@ export type Location = {
   lng: number | null;
   created_at: string;
 };
+
+export type ChatLog = {
+  id: string; // UUID
+  user_id: string | null; // Supabase認証ユーザーのID（CMS用）
+  session_id: string | null; // 匿名ユーザーの識別子（WEB用）
+  is_admin: boolean; // 管理者フラグ
+  conversation_id: string; // Difyの会話ID
+  query: string; // ユーザーの質問
+  answer: string; // Botの回答
+  created_at: string; // ISO形式の日付文字列（timestamp with time zone）
+};
+
+export type Knowledge = {
+  id: string; // uuid
+  title: string;
+  content: string;
+  category: string;
+  metadata: Record<string, any> | null; // JSONB
+  embedding: number[] | null; // pgvector (nullableで定義)
+  created_at: string; // ISO timestamp
+};

@@ -9,7 +9,13 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { House, Mail, Newspaper, StickyNote } from "lucide-react";
+import {
+  House,
+  Mail,
+  Newspaper,
+  StickyNote,
+  BotMessageSquare,
+} from "lucide-react";
 
 export function AppSidebar() {
   return (
@@ -53,6 +59,16 @@ export function AppSidebar() {
                 <Link href="/page">
                   <StickyNote />
                   <span>ページ</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/chat">
+                  <BotMessageSquare />
+                  <span>AIエージェント</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
