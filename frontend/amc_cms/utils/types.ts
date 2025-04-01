@@ -87,6 +87,7 @@ export type PageCategory = {
 
 export type Page = PageBase & {
   page_category?: PageCategory | null;
+  custom_fields?: PageCustomFieldValue[];
 };
 
 export type Location = {
@@ -117,4 +118,32 @@ export type Knowledge = {
   metadata: Record<string, any> | null; // JSONB
   embedding: number[] | null; // pgvector (nullableで定義)
   created_at: string; // ISO timestamp
+};
+
+export type CustomFieldDefinition = {
+  id: number;
+  key: string;
+  label: string;
+  type:
+    | "text"
+    | "textarea"
+    | "select"
+    | "checkbox"
+    | "radio"
+    | "date"
+    | "group";
+  options: string[] | null; // JSONBに保存される選択肢
+  is_repeatable: boolean;
+  page_category_id: number | null;
+  created_at: string;
+  page_category?: PageCategory | null;
+};
+
+export type PageCustomFieldValue = {
+  id: number;
+  page_id: number;
+  field_key: string;
+  value: any; // JSONBなので型は柔軟に対応、必要なら union 型なども定義可能
+  sort_order: number;
+  created_at: string;
 };

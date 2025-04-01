@@ -16,10 +16,10 @@ export default async function Page() {
           <Link href="/page/category">カテゴリー</Link>
         </Button>
         <Button asChild size="sm" variant="outline">
-          <Link href="/page/create">新規作成</Link>
+          <Link href="/custom-field">カスタムフィールド</Link>
         </Button>
         <Button asChild size="sm" variant="outline">
-          <Link href="/page/import">インポート</Link>
+          <Link href="/page/create">新規作成</Link>
         </Button>
       </div>
       <div>
