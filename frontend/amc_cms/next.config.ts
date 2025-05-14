@@ -9,8 +9,12 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: `${process.env.FRONT_END_URL}`, // ローカル用
+            value: "*", // ローカル用
           },
+          // {
+          //   key: "Access-Control-Allow-Origin",
+          //   value: `${process.env.FRONT_END_URL}`, // ローカル用
+          // },
           // {
           //   key: "Access-Control-Allow-Origin",
           //   value: "https://aqua-medical-c.com", // 本番用
