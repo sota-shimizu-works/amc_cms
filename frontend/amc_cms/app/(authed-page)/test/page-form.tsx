@@ -10,7 +10,7 @@ import InputName from "./inputs/input-name";
 import InputSlug from "./inputs/input-slug";
 import InputPrice from "./inputs/input-price";
 import TextareaAbout from "./inputs/textarea-about";
-import InputDescription from "./inputs/input-description";
+import InputEditor from "@/components/inputs/InputEditor";
 
 export const formSchema = z.object({
   name: z.string().min(1, "検査名は必須です"),
@@ -61,10 +61,11 @@ export default function PageForm({
         <InputSlug />
         <InputPrice />
         <TextareaAbout />
-        <InputDescription
+        <InputEditor
           name="description"
-          label="詳細説明"
-          description="検査の詳細を入力して下さい。"
+          label="本文"
+          description="記事の本文を入力してください。"
+          placeholder="ここに本文を入力してください"
         />
         <Button type="submit">{submitLabel}</Button>
       </form>

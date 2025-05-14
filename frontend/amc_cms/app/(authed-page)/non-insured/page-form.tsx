@@ -8,7 +8,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import InputName from "./inputs/input-name";
 import InputSlug from "./inputs/input-slug";
-import InputDescription from "./inputs/input-description";
+import InputEditor from "@/components/inputs/InputEditor";
 
 export const formSchema = z.object({
   name: z.string().min(1, "自費診療名は必須です"),
@@ -50,10 +50,11 @@ export default function PageForm({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <InputName />
         <InputSlug />
-        <InputDescription
+        <InputEditor
           name="description"
-          label="詳細説明"
-          description="自費診療の詳細を入力して下さい。"
+          label="本文"
+          description="記事の本文を入力してください。"
+          placeholder="ここに本文を入力してください"
         />
         <Button type="submit">{submitLabel}</Button>
       </form>
