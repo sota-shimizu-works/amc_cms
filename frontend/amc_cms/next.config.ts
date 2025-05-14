@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "http://localhost:4000", // ローカル用
+            value: `${process.env.FRONT_END_URL}`, // ローカル用
           },
           // {
           //   key: "Access-Control-Allow-Origin",
