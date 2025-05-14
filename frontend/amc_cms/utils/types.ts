@@ -147,3 +147,57 @@ export type PageCustomFieldValue = {
   sort_order: number;
   created_at: string;
 };
+
+export type Test = {
+  id: number;
+  created_at: string;
+  name: string;
+  slug: string;
+  price: number;
+  about: string;
+  description: string;
+};
+
+export type Insured = {
+  id: number;
+  created_at: string;
+  name: string;
+  slug: string;
+  provided: string;
+  insured_patient?: InsuredPatient[] | null;
+};
+
+export type InsuredPatient = {
+  id: number;
+  created_at: string;
+  name: string;
+  slug: string;
+  description: string;
+  insured_id: number;
+};
+
+export type InsuredTest = {
+  id: number;
+  created_at: string;
+  test_id: number;
+  insured_id: number;
+  test?: Test | null;
+  insured?: Insured | null;
+};
+
+export type NonInsured = {
+  id: number;
+  created_at: string;
+  name: string;
+  slug: string;
+  description: string;
+};
+
+export type NonInsuredTest = {
+  id: number;
+  created_at: string;
+  test_id: number;
+  non_insured_id: number;
+  test?: Test | null;
+  non_insured?: NonInsured | null;
+};

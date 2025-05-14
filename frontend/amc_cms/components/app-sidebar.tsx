@@ -15,6 +15,8 @@ import {
   Newspaper,
   StickyNote,
   BotMessageSquare,
+  FlaskConical,
+  FolderHeart,
 } from "lucide-react";
 
 export function AppSidebar() {
@@ -74,7 +76,38 @@ export function AppSidebar() {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
-        <SidebarGroup />
+        <SidebarGroup>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/test">
+                  <FlaskConical />
+                  <span>検査</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/insured">
+                  <FolderHeart />
+                  <span>保険診療</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/non-insured">
+                  <FolderHeart />
+                  <span>自費診療</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>

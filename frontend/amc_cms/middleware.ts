@@ -1,11 +1,30 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
 
-export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+// 認証を除外したいルートとメソッドのリスト
+const excludedRoutes: { path: string; method: string }[] = [
+  { path: "/api/insureds", method: "GET" },
+  { path: "/api/tests", method: "GET" },
+  { path: "/api/non-insureds", method: "GET" },
+  { path: "/api/insured-tests", method: "GET" },
+  { path: "/api/non-insured-tests", method: "GET" },
+  { path: "/api/insured-by-slug", method: "GET" },
+  { path: "/api/non-insured-by-slug", method: "GET" },
+  { path: "/api/test-by-slug", method: "GET" },
+  { path: "/api/rag/search", method: "ALL" },
+];
 
-  // 認証スキップしたいAPIルートを明示的に除外
-  if (pathname === "/api/rag/search") {
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const method = request.method;
+
+  const isExcluded = excludedRoutes.some(({ path, method: allowedMethod }) => {
+    const isPathMatch = pathname === path || pathname.startsWith(`${path}/`);
+    const isMethodMatch = allowedMethod === "ALL" || allowedMethod === method;
+    return isPathMatch && isMethodMatch;
+  });
+
+  if (isExcluded) {
     return NextResponse.next();
   }
 
@@ -14,7 +33,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // APIルート /api/rag/search を除外するように正規表現を追加
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$|api/rag/search).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

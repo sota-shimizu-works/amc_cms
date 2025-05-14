@@ -1,7 +1,5 @@
 import PageHeader from "@/components/page-header";
 import { selectPages } from "./actions";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Client from "./client";
