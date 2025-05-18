@@ -2,6 +2,14 @@
 
 import { createClient } from "@/utils/supabase/server";
 import * as cheerio from "cheerio";
+import { randomBytes } from "crypto";
+
+type UploadFileResult = {
+  url: string;
+  path: string;
+  size: number;
+  type: string;
+};
 
 export const uploadImageToSupabase = async (file: File): Promise<string> => {
   const supabase = await createClient();
@@ -25,6 +33,40 @@ export const uploadImageToSupabase = async (file: File): Promise<string> => {
     .getPublicUrl(filePath);
 
   return publicURLData.publicUrl;
+};
+
+export const uploadFileToSupabase = async (
+  file: File
+): Promise<UploadFileResult> => {
+  const supabase = await createClient();
+  const bucketName = "files";
+
+  // 拡張子を抽出（例: "pdf"）
+  const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
+
+  // ランダムなファイル名を生成（例: "editor/1747592049702-a8f3c9e2a7.pdf"）
+  const randomStr = randomBytes(8).toString("hex");
+  const filePath = `editor/${Date.now()}-${randomStr}.${ext}`;
+
+  const { data, error } = await supabase.storage
+    .from(bucketName)
+    .upload(filePath, file);
+
+  if (error) {
+    console.error("ファイルアップロードエラー:", error.message);
+    throw error;
+  }
+
+  const { data: publicUrlData } = supabase.storage
+    .from(bucketName)
+    .getPublicUrl(filePath);
+
+  return {
+    url: publicUrlData.publicUrl,
+    path: filePath,
+    size: file.size,
+    type: file.type || ext || "unknown",
+  };
 };
 
 export async function replaceImageUrlsInHtml(html: string): Promise<string> {

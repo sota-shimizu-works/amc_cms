@@ -17,6 +17,7 @@ import {
   BotMessageSquare,
   FlaskConical,
   FolderHeart,
+  BookImage,
 } from "lucide-react";
 
 export function AppSidebar() {
@@ -71,6 +72,16 @@ export function AppSidebar() {
                 <Link href="/chat">
                   <BotMessageSquare />
                   <span>AIエージェント</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/file">
+                  <BookImage />
+                  <span>メディア</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

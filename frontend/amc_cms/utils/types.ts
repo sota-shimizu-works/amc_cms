@@ -156,6 +156,7 @@ export type Test = {
   price: number;
   about: string;
   description: string;
+  test_report?: TestReport[] | null;
 };
 
 export type Insured = {
@@ -200,4 +201,24 @@ export type NonInsuredTest = {
   non_insured_id: number;
   test?: Test | null;
   non_insured?: NonInsured | null;
+};
+
+export type File = {
+  id: number;
+  created_at: string;
+  name: string;
+  path: string;
+  url: string;
+  type: string;
+  size: number;
+};
+
+export type TestReport = {
+  id: number;
+  created_at: string;
+  title: string;
+  test_id: number;
+  test?: Test | null;
+  file_id: number;
+  file?: File | null;
 };
