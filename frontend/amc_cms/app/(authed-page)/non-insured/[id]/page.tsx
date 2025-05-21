@@ -1,6 +1,7 @@
 import PageHeader from "@/components/page-header";
 import ClientForm from "./clientForm";
 import NonInsuredTestForm from "./nonInsuredTestForm";
+import InformationForm from "./informationForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Page() {
@@ -12,12 +13,16 @@ export default function Page() {
           <TabsList>
             <TabsTrigger value="general">基本設定</TabsTrigger>
             <TabsTrigger value="non-insured-tests">関連検査</TabsTrigger>
+            <TabsTrigger value="non-insured-infromation">告知情報</TabsTrigger>
           </TabsList>
           <TabsContent value="general">
             <ClientForm />
           </TabsContent>
           <TabsContent value="non-insured-tests">
             <NonInsuredTestForm />
+          </TabsContent>
+          <TabsContent value="non-insured-infromation">
+            <InformationForm />
           </TabsContent>
         </Tabs>
       </div>

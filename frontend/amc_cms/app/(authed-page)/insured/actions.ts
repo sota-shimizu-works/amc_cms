@@ -1,7 +1,12 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { Insured, InsuredPatient, InsuredTest } from "@/utils/types";
+import {
+  Insured,
+  InsuredPatient,
+  InsuredTest,
+  NonInsuredInformation,
+} from "@/utils/types";
 
 /**
  *
@@ -287,6 +292,100 @@ export const deleteInsuredTest = async (id: number) => {
 
   if (error) {
     console.error("Insured test deletion failed", error);
+    return { success: false, error };
+  }
+
+  return { success: true };
+};
+
+/**
+ * @param insured_id
+ * @description 保険診療の告知情報を取得する
+ */
+
+export const selectInsuredInformations = async (
+  insured_id: number
+): Promise<NonInsuredInformation[] | undefined> => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("insured_information")
+    .select("*, insured(*)")
+    .eq("insured_id", insured_id);
+
+  if (error) {
+    console.error("Error getting insured information", error);
+    return;
+  }
+
+  return data as NonInsuredInformation[];
+};
+
+export const selectInsuredInformation = async (
+  id: number
+): Promise<NonInsuredInformation | undefined> => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("insured_information")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error getting insured information", error);
+    return;
+  }
+
+  return data as NonInsuredInformation;
+};
+
+export const insertInsuredInformation = async (
+  data: Omit<NonInsuredInformation, "id" | "created_at">
+) => {
+  const supabase = await createClient();
+
+  const { data: inserted, error } = await supabase
+    .from("insured_information")
+    .insert([data])
+    .select("id")
+    .single();
+
+  if (error) {
+    console.error("Insured information registration failed", error);
+    return { success: false, error };
+  }
+
+  return { success: true, id: inserted.id };
+};
+
+export const updateInsuredInformation = async (
+  id: number,
+  data: Partial<Omit<NonInsuredInformation, "id">>
+) => {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("insured_information")
+    .update(data)
+    .eq("id", id);
+
+  if (error) {
+    console.error("Insured information update failed", error);
+    return { success: false, error };
+  }
+
+  return { success: true };
+};
+
+export const deleteInsuredInformation = async (id: number) => {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("insured_information")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error("Insured information deletion failed", error);
     return { success: false, error };
   }
 

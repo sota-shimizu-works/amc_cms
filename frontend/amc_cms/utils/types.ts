@@ -192,6 +192,7 @@ export type NonInsured = {
   name: string;
   slug: string;
   description: string;
+  non_insured_information?: NonInsuredInformation[] | null;
 };
 
 export type NonInsuredTest = {
@@ -221,4 +222,24 @@ export type TestReport = {
   test?: Test | null;
   file_id: number;
   file?: File | null;
+};
+
+export type InsuredInformation = {
+  id: number;
+  created_at: string;
+  title: string;
+  content: string;
+  url: string;
+  insured_id: number;
+  insured?: Insured | null;
+};
+
+export type NonInsuredInformation = {
+  id: number;
+  created_at: string;
+  title: string;
+  content: string;
+  url: string;
+  non_insured_id: number;
+  non_insured?: NonInsured | null;
 };
