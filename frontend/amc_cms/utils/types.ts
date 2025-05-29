@@ -165,6 +165,7 @@ export type Insured = {
   name: string;
   slug: string;
   provided: string;
+  description: string | null;
   insured_patient?: InsuredPatient[] | null;
 };
 

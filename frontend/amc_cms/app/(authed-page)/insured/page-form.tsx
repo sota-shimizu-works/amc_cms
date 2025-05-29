@@ -9,11 +9,13 @@ import { Button } from "@/components/ui/button";
 import InputName from "./inputs/input-name";
 import InputSlug from "./inputs/input-slug";
 import TextareaProvided from "./inputs/textarea-provided";
+import InputEditor from "@/components/inputs/InputEditor";
 
 export const formSchema = z.object({
   name: z.string().min(1, "保険診療名は必須です"),
   slug: z.string().min(1, "スラッグは必須です"),
   provided: z.string().min(1, "診療内容は必須です"),
+  description: z.string().optional(),
 });
 
 export type PageFormValues = z.infer<typeof formSchema>;
@@ -35,6 +37,7 @@ export default function PageForm({
       name: "",
       slug: "",
       provided: "",
+      description: "",
     },
   });
 
@@ -51,6 +54,12 @@ export default function PageForm({
         <InputName />
         <InputSlug />
         <TextareaProvided />
+        <InputEditor
+          name="description"
+          label="本文"
+          description="記事の本文を入力してください。"
+          placeholder="ここに本文を入力してください"
+        />
         <Button type="submit">{submitLabel}</Button>
       </form>
     </Form>
