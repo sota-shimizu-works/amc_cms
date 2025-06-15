@@ -23,6 +23,36 @@ export const selectArticles = async (orderByUpdate?: boolean) => {
   return data;
 };
 
+export const selectArticlesWithPagination = async (
+  orderByUpdate?: boolean,
+  page: number = 1,
+  perPage: number = 10
+) => {
+  const supabase = await createClient();
+
+  const from = (page - 1) * perPage;
+  const to = from + perPage - 1;
+
+  const { data, error, count } = await supabase
+    .from("article")
+    .select("*, article_category(*, category(*))", { count: "exact" })
+    .order(orderByUpdate ? "updated_at" : "created_at", { ascending: false })
+    .range(from, to);
+
+  if (error) {
+    console.error("Error getting paginated articles", error);
+    return;
+  }
+
+  return {
+    data,
+    total: count ?? 0,
+    page,
+    perPage,
+    totalPages: count ? Math.ceil(count / perPage) : 1,
+  };
+};
+
 export const selectArticle = async (articleId: number) => {
   const supabase = await createClient();
   const { data, error } = await supabase

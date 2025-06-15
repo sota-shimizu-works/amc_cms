@@ -12,6 +12,7 @@ const excludedRoutes: { path: string; method: string }[] = [
   { path: "/api/non-insured-by-slug", method: "GET" },
   { path: "/api/test-by-slug", method: "GET" },
   { path: "/api/rag/search", method: "ALL" },
+  { path: "/api/articles", method: "GET" },
 ];
 
 export async function middleware(request: NextRequest) {
